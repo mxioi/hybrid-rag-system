@@ -1,0 +1,144 @@
+# Homelab Context Pack - TEMPLATE
+#
+# This file provides structured context about your homelab infrastructure
+# for use by local LLM agents and automation systems.
+#
+# INSTRUCTIONS:
+# 1. Copy this file and rename to homelab-context.yaml
+# 2. Replace all <ADD-...> placeholders with your actual values
+# 3. Add/remove systems as needed for your environment
+# 4. Index this file into ChromaDB after editing
+
+version: "1.0"
+last_updated: "<ADD-DATE>"
+
+# =============================================================================
+# SYSTEMS INVENTORY
+# =============================================================================
+systems:
+  # ---------------------------------------------------------------------------
+  # Example: NAS/Storage Server
+  # ---------------------------------------------------------------------------
+  nas:
+    hostname: "<ADD-HOSTNAME>"
+    ip: "<ADD-IP-ADDRESS>"
+    role: "storage/docker"
+    os: "Unraid/TrueNAS/etc"
+    hardware:
+      cpu: "<ADD-CPU-MODEL>"
+      cores: 8
+      ram_gb: 32
+
+    storage:
+      # Adjust for your array type
+      total_tb: 10
+      used_tb: 5
+      usage_percent: 50
+
+    services:
+      # List your Docker containers/services
+      example_service:
+        port: 8080
+        container: "example"
+        purpose: "Description of service"
+
+  # ---------------------------------------------------------------------------
+  # Example: Virtualization Host
+  # ---------------------------------------------------------------------------
+  hypervisor:
+    hostname: "<ADD-HOSTNAME>"
+    ip: "<ADD-IP-ADDRESS>"
+    role: "compute/virtualization"
+    os: "Proxmox/ESXi/etc"
+
+    vms:
+      - vmid: 100
+        name: "<ADD-VM-NAME>"
+        ip: "<ADD-IP-ADDRESS>"
+        role: "description"
+        os: "Windows Server/Linux"
+        status: "running"
+
+    lxcs:
+      - vmid: 200
+        name: "<ADD-CONTAINER-NAME>"
+        ip: "<ADD-IP-ADDRESS>"
+        role: "description"
+
+  # ---------------------------------------------------------------------------
+  # Example: LLM Inference Server
+  # ---------------------------------------------------------------------------
+  ollama:
+    hostname: "<ADD-HOSTNAME>"
+    ip: "<ADD-IP-ADDRESS>"
+    port: 11434
+    role: "llm-inference"
+    models:
+      - name: "mistral"
+        default: true
+      - name: "llama3.2:3b"
+
+# =============================================================================
+# NETWORK TOPOLOGY
+# =============================================================================
+network:
+  domain: "<ADD-DOMAIN>"
+  gateway: "<ADD-GATEWAY-IP>"
+  dns_servers:
+    - "<ADD-DNS-IP-1>"
+    - "<ADD-DNS-IP-2>"
+
+  subnets:
+    management:
+      cidr: "<ADD-SUBNET-CIDR>"
+      vlan: null  # or VLAN ID
+
+# =============================================================================
+# SSH ACCESS CONFIGURATION
+# =============================================================================
+ssh_access:
+  # Add your SSH configurations here
+  hypervisor:
+    host: "<ADD-IP-ADDRESS>"
+    user: "<ADD-USERNAME>"
+    key: "~/.ssh/<ADD-KEY-NAME>"
+
+# =============================================================================
+# LOCAL LLM INFRASTRUCTURE
+# =============================================================================
+local_llm:
+  chromadb:
+    host: "<ADD-IP-ADDRESS>"
+    port: 8000
+    primary_collection: "homelab_knowledge"
+
+  ollama:
+    host: "<ADD-IP-ADDRESS>"
+    port: 11434
+    default_model: "mistral"
+
+  scripts:
+    base_path: "/path/to/scripts"
+    available:
+      - name: "ollama-full-toolset.py"
+        description: "Full agent with tool capabilities"
+      - name: "hybrid-rag.py"
+        description: "RAG with Claude fallback"
+      - name: "chromadb_helper.py"
+        description: "ChromaDB search with sentence-transformers"
+
+# =============================================================================
+# COMMON OPERATIONS REFERENCE
+# =============================================================================
+operations:
+  check_storage:
+    description: "Check disk usage"
+    commands:
+      - "df -h"
+      - "docker system df"
+
+  check_containers:
+    description: "Check Docker containers"
+    commands:
+      - "docker ps -a"
+      - "docker stats --no-stream"

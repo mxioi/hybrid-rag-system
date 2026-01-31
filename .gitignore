@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+*.key
+*_api_key
+
+# ChromaDB data
+chroma_data/
+*.db
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+temp/
+
+# Config with sensitive data
+config.local.py
+*_local.py
+
+# Virtual environment
+venv/
+.venv/
+
+# Cache
+__pycache__/
+*.pyc
+.cache/
+
+# Logs
+logs/
+*.log
+
+# Local config
+.env
+*.local
+
+# IDE
+.vscode/
+.idea/
+
+# Credentials (never commit)
+credentials/
+*.pem
+*.key
